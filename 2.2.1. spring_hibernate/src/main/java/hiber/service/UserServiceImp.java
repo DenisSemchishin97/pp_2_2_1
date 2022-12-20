@@ -11,8 +11,11 @@ import java.util.List;
 @Service
 public class UserServiceImp implements UserService {
 
-   @Autowired
-   private UserDao userDao;
+
+   private  UserDao userDao;
+   UserServiceImp(UserDao userDao){
+      this.userDao=userDao;
+   }
 
    @Transactional
    @Override
@@ -25,7 +28,7 @@ public class UserServiceImp implements UserService {
    public List<User> listUsers() {
       return userDao.listUsers();
    }
-   @Transactional
+   @Transactional(readOnly = true)
    @Override
    public User getUserByCarColorAndSeries(String model, int series){
       return userDao.getUserByCarColorAndSeries(model,series);
